@@ -1,0 +1,24 @@
+service: corona-zeit-scraper
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: eu-central-1
+
+package:
+  include:
+    - src/**
+  exclude:
+    - .cache.json
+
+functions:
+  getCoronaDataGermany:
+    handler: handler.getCoronaDataGermany
+    events:
+      - http:
+          path: getCoronaDataGermany
+          method: get
